@@ -2,7 +2,7 @@ public class RectApp {
     public static void main(String[] args) {
         Rect r1 = new Rect(1, 101, 10, 10);
         r1.print();
-        r1.area();
+        System.out.println(r1.area());
         r1.drag(100, -100);
         r1.print();
     }
