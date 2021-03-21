@@ -10,6 +10,8 @@ public class Hello2DApp {
 }
 
 class Hello2DFrame extends JFrame {
+    private static final long serialVersionUID = 1L;
+
     public Hello2DFrame () {
         this.addWindowListener (
             new WindowAdapter() {
