@@ -28,12 +28,12 @@ class PackFrame extends JFrame {
         );
         this.setTitle("Java Packages");
         this.setSize(350, 350);
-        this.r1 = new Rect3(50,50, 100,30);
-        this.r2 = new Rect3(200,50, 100,30);
-        this.e1 = new Ellipse2(50,100, 100,30);
-        this.e2 = new Ellipse2(200,100, 100,30);
-        this.h1 = new Hexagon(50,150, 100,80, Color.BLACK, Color.BLUE);
-        this.h2 = new Hexagon(200,150, 100,80, Color.ORANGE, Color.YELLOW);
+        this.r1 = new Rect3(50,50, 100,30, Color.BLACK, Color.BLUE);
+        this.r2 = new Rect3(200,50, 100,30, Color.CYAN, Color.DARK_GRAY);
+        this.e1 = new Ellipse2(50,100, 100,30, Color.GRAY, Color.GREEN);
+        this.e2 = new Ellipse2(200,100, 100,30, Color.LIGHT_GRAY, Color.MAGENTA);
+        this.h1 = new Hexagon(50,150, 100,80, Color.ORANGE, Color.PINK);
+        this.h2 = new Hexagon(200,150, 100,80, Color.RED, Color.YELLOW);
     }
 
     public void paint (Graphics g) {
