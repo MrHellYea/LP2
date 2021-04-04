@@ -53,7 +53,9 @@ class ListFrame extends JFrame {
     public void paint(Graphics g) {
         super.paint(g);
 
-        for (Figure fig: this.figs)
+        for (Figure fig: this.figs) {
             fig.paint(g);
+            fig.print();
+        }
     }
 }

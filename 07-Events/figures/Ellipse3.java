@@ -4,23 +4,14 @@ import java.awt.*;
 import java.awt.geom.Ellipse2D;
 
 public class Ellipse3 extends Figure {
-    private int x, y;
-    private int w, h;
-
-    private Color border, inner;
-
     public Ellipse3 (int x, int y, int w, int h, Color border, Color inner) {
+        this.type = "Elipse";
         this.x = x;
         this.y = y;
         this.w = w;
         this.h = h;
         this.border = border;
         this.inner = inner;
-    }
-
-    public void print () {
-        System.out.format("Elipse de tamanho (%d,%d) na posicao (%d,%d).\n",
-            this.w, this.h, this.x, this.y);
     }
 
     public void paint (Graphics g) {

@@ -3,14 +3,11 @@ package figures;
 import java.awt.*;
 
 public class Hexagon2 extends Figure {
-    private int x, y;
-    private int w, h;
     private int x1, y1, x2, y2, x3, y3;
     private int x4, y4, x5, y5, x6, y6;
-
-    private Color border, inner;
     
     public Hexagon2(int x, int y, int w, int h, Color border, Color inner) {
+        this.type = "Hexagono";
         this.x = x;
         this.y = y;
         this.w = w;
@@ -36,11 +33,6 @@ public class Hexagon2 extends Figure {
 
         this.border = border;
         this.inner = inner;
-    }
-
-    public void print() {
-        System.out.format("Hexagono de tamanho (%d, %d), na posicao ($d, %d).\n",
-            this.w, this.h, this.x, this.y);
     }
 
     public void paint(Graphics g) {

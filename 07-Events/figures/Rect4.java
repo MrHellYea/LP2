@@ -3,22 +3,14 @@ package figures;
 import java.awt.*;
 
 public class Rect4 extends Figure {
-    private int x, y;
-    private int w, h;
-    private Color border, inner;
-
     public Rect4 (int x, int y, int w, int h, Color border, Color inner) {
+        this.type = "Retangulo";
         this.x = x;
         this.y = y;
         this.w = w;
         this.h = h;
         this.border = border;
         this.inner = inner;
-    }
-
-    public void print() {
-        System.out.format("Retangulo de tamanho (%d,%d) na posicao (%d,%d).\n",
-            this.w, this.h, this.x, this.y);
     }
 
     public void paint(Graphics g) {
