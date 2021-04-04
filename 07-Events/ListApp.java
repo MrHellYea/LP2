@@ -16,8 +16,7 @@ public class ListApp {
 class ListFrame extends JFrame {
     private static final long serialVersionUID = 1L;
 
-    ArrayList<Ellipse3> es = new ArrayList<Ellipse3>();
-    ArrayList<Rect4> rs = new ArrayList<Rect4>();
+    ArrayList<Figure> figs = new ArrayList<Figure>();
     Random rand = new Random();
 
     ListFrame() {
@@ -32,23 +31,17 @@ class ListFrame extends JFrame {
         this.addKeyListener(
             new KeyAdapter() {
                 public void keyPressed(KeyEvent evt) {
-                    if (evt.getKeyChar() == 'r') {
-                        int x = rand.nextInt(300);
-                        int y = rand.nextInt(300);
-                        int w = rand.nextInt(50);
-                        int h = rand.nextInt(50);
-                        rs.add(new Rect4(x, y, w, h, Color.BLACK, Color.BLUE));
-                        repaint(); 
-                    }
-
-                    else if (evt.getKeyChar() == 'e') {
-                        int x = rand.nextInt(300);
-                        int y = rand.nextInt(300);
-                        int w = rand.nextInt(50);
-                        int h = rand.nextInt(50);
-                        es.add(new Ellipse3(x, y, w, h, Color.BLACK, Color.GREEN));
-                        repaint(); 
-                    }
+                    int x = rand.nextInt(300);
+                    int y = rand.nextInt(300);
+                    int w = 10 + rand.nextInt(40);
+                    int h = 10 + rand.nextInt(40);
+                    if (evt.getKeyChar() == 'r')
+                        figs.add(new Rect4(x, y, w, h, Color.BLACK, Color.BLUE));
+                    else if (evt.getKeyChar() == 'e')
+                        figs.add(new Ellipse3(x, y, w, h, Color.BLACK, Color.GREEN));
+                    else if (evt.getKeyChar() == 'h')
+                        figs.add(new Hexagon2(x, y, w, h, Color.BLACK, Color.RED));
+                    repaint(); 
                 }
             }
         );
@@ -60,9 +53,7 @@ class ListFrame extends JFrame {
     public void paint(Graphics g) {
         super.paint(g);
 
-        for (Rect4 r: this.rs)
-            r.paint(g);
-        for (Ellipse3 e: this.es)
-            e.paint(g);
+        for (Figure fig: this.figs)
+            fig.paint(g);
     }
 }

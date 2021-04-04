@@ -3,7 +3,7 @@ package figures;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 
-public class Ellipse3 {
+public class Ellipse3 extends Figure {
     private int x, y;
     private int w, h;
 

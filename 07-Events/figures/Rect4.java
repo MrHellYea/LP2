@@ -2,7 +2,7 @@ package figures;
 
 import java.awt.*;
 
-public class Rect4 {
+public class Rect4 extends Figure {
     private int x, y;
     private int w, h;
     private Color border, inner;
