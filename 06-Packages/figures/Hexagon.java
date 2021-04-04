@@ -46,22 +46,15 @@ public class Hexagon {
     public void paint(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
 
-        g2d.setColor(this.inner);
-
         int x[] = {this.x1, this.x2, this.x3, this.x4, this.x5, this.x6};
         int y[] = {this.y1, this.y2, this.y3, this.y4, this.y5, this.y6};
 
         Polygon InnerHexagon = new Polygon(x, y, 6);
 
-        g2d.fillPolygon(InnerHexagon);
+        g2d.setColor(this.inner);
+        g2d.drawPolygon(InnerHexagon);
 
         g2d.setColor(this.border);
-
-        g2d.drawLine(this.x1, this.y1, this.x2, this.y2);
-        g2d.drawLine(this.x2, this.y2, this.x3, this.y3);
-        g2d.drawLine(this.x3, this.y3, this.x4, this.y4);
-        g2d.drawLine(this.x1, this.y1, this.x6, this.y6);
-        g2d.drawLine(this.x6, this.y6, this.x5, this.y5);
-        g2d.drawLine(this.x4, this.y4, this.x5, this.y5);
+        g2d.fillPolygon(InnerHexagon);
     }
 }
