@@ -2,7 +2,7 @@ package figures;
 
 import java.awt.*;
 
-public class Hexagon {
+public class Hexagon1 {
     private int x, y;
     private int w, h;
     private int x1, y1, x2, y2, x3, y3;
@@ -10,7 +10,7 @@ public class Hexagon {
 
     private Color border, inner;
     
-    public Hexagon(int x, int y, int w, int h, Color border, Color inner) {
+    public Hexagon1(int x, int y, int w, int h, Color border, Color inner) {
         this.x = x;
         this.y = y;
         this.w = w;

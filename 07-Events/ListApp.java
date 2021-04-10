@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Random;
 
-import figures.*;
+import Figures.*;
 
 public class ListApp {
     public static void main(String[] args) {

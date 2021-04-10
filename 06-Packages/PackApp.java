@@ -16,7 +16,7 @@ class PackFrame extends JFrame {
 
     Rect3 r1, r2;
     Ellipse2 e1, e2;
-    Hexagon h1, h2;
+    Hexagon1 h1, h2;
 
     PackFrame () {
         this.addWindowListener (
@@ -32,8 +32,8 @@ class PackFrame extends JFrame {
         this.r2 = new Rect3(200,50, 100,30, Color.CYAN, Color.DARK_GRAY);
         this.e1 = new Ellipse2(50,100, 100,30, Color.GRAY, Color.GREEN);
         this.e2 = new Ellipse2(200,100, 100,30, Color.LIGHT_GRAY, Color.MAGENTA);
-        this.h1 = new Hexagon(50,150, 100,80, Color.ORANGE, Color.PINK);
-        this.h2 = new Hexagon(200,150, 100,80, Color.RED, Color.YELLOW);
+        this.h1 = new Hexagon1(50,150, 100,80, Color.ORANGE, Color.PINK);
+        this.h2 = new Hexagon1(200,150, 100,80, Color.RED, Color.YELLOW);
     }
 
     public void paint (Graphics g) {
