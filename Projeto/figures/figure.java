@@ -7,7 +7,7 @@ public abstract class figure {
     public int x, y;
     public int w, h;
     public float thickness;
-    String type;
+    public String type;
     public Color border, inner;
     
     public abstract void paint(Graphics g);

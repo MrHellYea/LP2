@@ -95,23 +95,25 @@ class List_frame extends JFrame {
                         figs.add(new hexagon(mouse_pos.x, mouse_pos.y, 60, 60, Color.BLACK, Color.WHITE));
                     else if (evt.getKeyChar() == 't')
                         figs.add(new triangle(mouse_pos.x, mouse_pos.y, 60, 60, Color.BLACK, Color.WHITE));
+                    else if (evt.getKeyChar() == 'l')
+                        figs.add(new line(mouse_pos.x, mouse_pos.y, 60, 60, Color.BLACK));
                     else if (evt.getKeyCode() == 39 & focus != null) { // right
-                        if (focus.w < 200) {
+                        if (focus.w < 200 || focus.type == "Linha") {
                             focus.w += 5;
                             focus.resize();
                         }
                     } else if (evt.getKeyCode() == 37 & focus != null) { // left
-                        if (focus.w > 20) {
+                        if (focus.w > 20 || focus.type == "Linha") {
                             focus.w -= 5;
                             focus.resize();
                         }
                     } else if (evt.getKeyCode() == 38 & focus != null) { // up
-                        if (focus.h > 20) {
+                        if (focus.h > 20 || focus.type == "Linha") {
                             focus.h -= 5;
                             focus.resize();
                         }
                     } else if (evt.getKeyCode() == 40 & focus != null) { // down
-                        if (focus.h < 200) {
+                        if (focus.h < 200 || focus.type == "Linha") {
                             focus.h  += 5;
                             focus.resize();
                         }
