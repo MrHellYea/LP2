@@ -11,7 +11,7 @@ public abstract class figure {
     public Color border, inner;
     
     public abstract void paint(Graphics g);
-    public abstract void drag(int x, int y);
+    public abstract void drag(int x, int y, Point mouse_pos);
     public abstract boolean contains(MouseEvent evt);
     public abstract void resize();
 

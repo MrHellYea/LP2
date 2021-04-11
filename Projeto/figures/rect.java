@@ -30,7 +30,7 @@ public class rect extends figure {
         g2d.drawRect(this.x, this.y, this.w, this.h);
     }
 
-    public void drag (int x, int y) {
+    public void drag (int x, int y, Point mouse_pos) {
         this.x += x;
         this.y += y;
         this.polygon = new Rectangle(this.x, this.y, this.w, this.h);

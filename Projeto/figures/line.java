@@ -36,15 +36,24 @@ public class line extends figure{
         g2d.draw(this.polygon);
     }
 
-    public void drag (int x, int y) {
-        this.x += x;
-        this.y += y;
+    public void drag (int x, int y, Point mouse_pos) {
+        if (Math.sqrt(Math.pow(this.x1 - mouse_pos.x, 2) + Math.pow(this.y1 - mouse_pos.y, 2)) <= 5) {
+            this.x1 += x;
+            this.y1 += y;
+        } else if (Math.sqrt(Math.pow(this.x2 - mouse_pos.x, 2) + Math.pow(this.y2 - mouse_pos.y, 2)) <= 5) {
+            this.x2 += x;
+            this.y2 += y;
+        } else {
+            this.x += x;
+            this.y += y;
 
-        this.x1 += x;
-        this.y1 += y;
+            this.x1 += x;
+            this.y1 += y;
 
-        this.x2 += x;
-        this.y2 += y;
+            this.x2 += x;
+            this.y2 += y;
+        }
+
         this.polygon = new Line2D.Float(this.x1, this.y1, this.x2, this.y2);
     }
 

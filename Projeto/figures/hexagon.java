@@ -58,7 +58,7 @@ public class hexagon extends figure {
         g2d.fillPolygon(this.polygon);
     }
 
-    public void drag(int x, int y) {
+    public void drag(int x, int y, Point mouse_pos) {
         this.x += x;
         this.y += y;
 

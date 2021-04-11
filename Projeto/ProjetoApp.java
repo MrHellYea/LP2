@@ -70,7 +70,7 @@ class List_frame extends JFrame {
                 public void mouseDragged (MouseEvent evt) {
                     if (focus != null) {
                         if (start_pos != null)
-                            focus.drag(evt.getX() - start_pos.x, evt.getY() - start_pos.y);
+                            focus.drag(evt.getX() - start_pos.x, evt.getY() - start_pos.y, evt.getPoint());
                         start_pos = getMousePosition();
                         repaint();
                     }

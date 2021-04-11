@@ -31,7 +31,7 @@ public class ellipse extends figure {
         g2d.fill(this.polygon);
     }
 
-    public void drag (int x, int y) {
+    public void drag (int x, int y, Point mouse_pos) {
         this.x += x;
         this.y += y;
         this.polygon = new Ellipse2D.Double(this.x, this.y, this.w, this.h);
