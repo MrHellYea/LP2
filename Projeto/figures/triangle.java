@@ -49,6 +49,9 @@ public class triangle extends figure {
     }
 
     public void drag (int x, int y) {
+        this.x += x;
+        this.y += y;
+
         for (int i = 0; i < this.x_array.length; i++) {
             this.x_array[i] += x;
             this.y_array[i] += y;

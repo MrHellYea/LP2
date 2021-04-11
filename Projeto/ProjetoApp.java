@@ -116,11 +116,11 @@ class List_frame extends JFrame {
                             focus.resize();
                         }
                     } else if (evt.getKeyCode() == 61 & focus != null) { // =
-                        if (focus.thickness < 5)
-                            focus.thickness += 0.2;
+                        if (focus.thickness < 7.5)
+                            focus.thickness += 0.5;
                     } else if (evt.getKeyCode() == 45 & focus != null) { // -
                         if (focus.thickness > 1)
-                            focus.thickness -= 0.2;
+                            focus.thickness -= 0.5;
                     } else if (evt.getKeyCode() == 35 & focus != null) { // end
                         inner_color_index--;
                         change_inner = true;
