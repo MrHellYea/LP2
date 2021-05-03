@@ -108,16 +108,17 @@ class List_frame extends JFrame {
                         figs.add(new triangle(mouse_pos.x, mouse_pos.y, 60, 60, Color.BLACK, Color.WHITE));
                     else if (evt.getKeyChar() == 'l')
                         figs.add(new line(mouse_pos.x, mouse_pos.y, 60, 60, Color.BLACK));
-                    else if (evt.getKeyCode() == 9) { // tab
-                        if (focus != null) {
-                            focus.border = aux;
-                        }
-                        
+                    else if (evt.getKeyCode() == 9) { // tab                  
                         if (figs.size() > 0) {
                             focus = figs.get(0);
-                            aux = focus.border;
-                            
-                            focus.border = Color.RED;
+                            focus_rect.x = focus.x - 1;
+                            focus_rect.y = focus.y - 1;
+                            focus_rect.w = focus.w + 2;
+                            focus_rect.h = focus.h + 2;
+                            focus_ellipse.x = focus.x + focus.w - 8;
+                            focus_ellipse.y = focus.y + focus.h - 8;
+                            focus_rect.resize();
+
                             figs.remove(focus);
                             figs.add(focus);
                         }
