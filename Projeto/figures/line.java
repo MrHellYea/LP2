@@ -36,12 +36,10 @@ public class line extends figure{
         g2d.draw(this.polygon);
     }
 
-    public void drag (int x, int y, Point mouse_pos) {
+    public void drag (Point mouse_pos, int dist_x, int dist_y) {
         if (Math.sqrt(Math.pow(this.x2 - mouse_pos.x, 2) + Math.pow(this.y2 - mouse_pos.y, 2)) <= 8) {
-            this.w += x;
-            this.x2 += x;
-            this.h += y;
-            this.y2 += y;
+            this.w += mouse_pos.x - (this.x + this.w);
+            this.h += mouse_pos.y - (this.y + this.h);
 
             if (this.w < 20) {
                 this.w = 20;
@@ -51,17 +49,11 @@ public class line extends figure{
                 this.y2 = this.y + this.h;
             }
         } else {
-            this.x += x;
-            this.y += y;
-
-            this.x1 += x;
-            this.y1 += y;
-
-            this.x2 += x;
-            this.y2 += y;
+            this.x = mouse_pos.x - dist_x;
+            this.y = mouse_pos.y - dist_y;
         }
 
-        this.polygon = new Line2D.Float(this.x1, this.y1, this.x2, this.y2);
+        this.resize();
     }
 
     public boolean contains(MouseEvent evt) {

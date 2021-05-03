@@ -15,9 +15,8 @@ public class ProjetoApp {
 class List_frame extends JFrame {
     private static final long serialVersionUID = 1L;
 
-    Point start_pos;
     boolean change_inner, change_border;
-    int inner_color_index = 0, border_color_index = 1;
+    int inner_color_index = 0, border_color_index = 1, dist_x, dist_y;
     ArrayList<figure> figs = new ArrayList<figure>();
     figure focus = null, focus_rect = new rect(0, 0, 0, 0, Color.RED, null), focus_ellipse = new ellipse(0, 0, 10, 10, Color.BLACK, Color.WHITE);
     Color aux = null, colors[] = {
@@ -39,9 +38,10 @@ class List_frame extends JFrame {
         this.addMouseListener (
             new MouseAdapter() {
                 public void mousePressed (MouseEvent evt) {
-                    start_pos = getMousePosition();
-
+                        
                     if (focus_rect.contains(evt) && focus != null) {
+                        dist_x = evt.getX() - focus.x;
+                        dist_y = evt.getY() - focus.y;
                         return;
                     }
 
@@ -53,6 +53,8 @@ class List_frame extends JFrame {
                     }
                     
                     if (focus != null) {
+                        dist_x = evt.getX() - focus.x;
+                        dist_y = evt.getY() - focus.y;
                         focus_rect.x = focus.x - 1;
                         focus_rect.y = focus.y - 1;
                         focus_rect.w = focus.w + 2;
@@ -73,17 +75,15 @@ class List_frame extends JFrame {
             new MouseMotionAdapter() {
                 public void mouseDragged (MouseEvent evt) {
                     if (focus != null) {
-                        if (start_pos != null) {
-                            focus.drag(evt.getX() - start_pos.x, evt.getY() - start_pos.y, evt.getPoint());
-                            focus_rect.x = focus.x - 1;
-                            focus_rect.y = focus.y - 1;
-                            focus_rect.w = focus.w + 2;
-                            focus_rect.h = focus.h + 2;
-                            focus_ellipse.x = focus.x + focus.w - 8;
-                            focus_ellipse.y = focus.y + focus.h - 8;
-                            focus_rect.resize();
-                        }
-                        start_pos = getMousePosition();
+                        focus.drag(evt.getPoint(), dist_x, dist_y);
+                        focus_rect.x = focus.x - 1;
+                        focus_rect.y = focus.y - 1;
+                        focus_rect.w = focus.w + 2;
+                        focus_rect.h = focus.h + 2;
+                        focus_ellipse.x = focus.x + focus.w - 8;
+                        focus_ellipse.y = focus.y + focus.h - 8;
+                        focus_rect.resize();
+
                         repaint();
                     }
                 }

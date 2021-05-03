@@ -58,27 +58,21 @@ public class hexagon extends figure {
         g2d.fillPolygon(this.polygon);
     }
 
-    public void drag(int x, int y, Point mouse_pos) {
+    public void drag(Point mouse_pos, int dist_x, int dist_y) {
         if (Math.sqrt(Math.pow((this.x + this.w) - mouse_pos.x, 2) + Math.pow((this.y + this.h)- mouse_pos.y, 2)) <= 10) {
-            this.w += x;
-            this.h += y;
+            this.w += mouse_pos.x - (this.x + this.w);
+            this.h += mouse_pos.y - (this.y + this.h);
 
             if (this.w < 20)
                 this.w = 20;
             if (this.h < 20)
                 this.h = 20;
-
-            this.resize();
         } else { 
-            this.x += x;
-            this.y += y;
-        
-            for (int i = 0; i < this.x_array.length; i++) {
-                this.x_array[i] += x;
-                this.y_array[i] += y;
-            }
-            this.polygon = new Polygon(this.x_array, this.y_array, 6);
+            this.x = mouse_pos.x - dist_x;
+            this.y = mouse_pos.y - dist_y;
         }
+
+        this.resize();
     }
 
     public boolean contains(MouseEvent evt) {

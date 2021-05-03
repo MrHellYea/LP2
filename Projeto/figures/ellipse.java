@@ -31,18 +31,18 @@ public class ellipse extends figure {
         g2d.fill(new Ellipse2D.Double(this.x, this.y, this.w, this.h));
     }
 
-    public void drag (int x, int y, Point mouse_pos) {
+    public void drag (Point mouse_pos, int dist_x, int dist_y) {
         if (Math.sqrt(Math.pow((this.x + this.w) - mouse_pos.x, 2) + Math.pow((this.y + this.h)- mouse_pos.y, 2)) <= 10) {
-            this.w += x;
-            this.h += y;
+            this.w += mouse_pos.x - (this.x + this.w);
+            this.h += mouse_pos.y - (this.y + this.h);
 
             if (this.w < 20)
                 this.w = 20;
             if (this.h < 20)
                 this.h = 20;
         } else { 
-            this.x += x;
-            this.y += y;
+            this.x = mouse_pos.x - dist_x;
+            this.y = mouse_pos.y - dist_y;
         }
         this.polygon = new Ellipse2D.Double(this.x, this.y, this.w, this.h);
     }
