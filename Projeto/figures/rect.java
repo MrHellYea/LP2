@@ -23,16 +23,30 @@ public class rect extends figure {
         Graphics2D g2d = (Graphics2D) g;
 
         g2d.setStroke(new BasicStroke(this.thickness));
-        g2d.setPaint(this.inner);
-        g2d.fillRect(this.x, this.y, this.w, this.h);
+
+        if (this.inner != null) {
+            g2d.setPaint(this.inner);
+            g2d.fillRect(this.x, this.y, this.w, this.h);
+        }
 
         g2d.setPaint(this.border);
         g2d.drawRect(this.x, this.y, this.w, this.h);
     }
 
     public void drag (int x, int y, Point mouse_pos) {
-        this.x += x;
-        this.y += y;
+        if (Math.sqrt(Math.pow((this.x + this.w) - mouse_pos.x, 2) + Math.pow((this.y + this.h)- mouse_pos.y, 2)) <= 10) {
+            this.w += x;
+            this.h += y;
+
+            if (this.w < 20)
+                this.w = 20;
+            if (this.h < 20)
+                this.h = 20;
+        } else { 
+            this.x += x;
+            this.y += y;    
+        }
+        
         this.polygon = new Rectangle(this.x, this.y, this.w, this.h);
     }
 

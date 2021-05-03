@@ -49,14 +49,26 @@ public class triangle extends figure {
     }
 
     public void drag (int x, int y, Point mouse_pos) {
-        this.x += x;
-        this.y += y;
+        if (Math.sqrt(Math.pow((this.x + this.w) - mouse_pos.x, 2) + Math.pow((this.y + this.h)- mouse_pos.y, 2)) <= 10) {
+            this.w += x;
+            this.h += y;
 
-        for (int i = 0; i < this.x_array.length; i++) {
-            this.x_array[i] += x;
-            this.y_array[i] += y;
+            if (this.w < 20)
+                this.w = 20;
+            if (this.h < 20)
+                this.h = 20;
+
+            this.resize();
+        } else { 
+            this.x += x;
+            this.y += y;
+
+            for (int i = 0; i < this.x_array.length; i++) {
+                this.x_array[i] += x;
+                this.y_array[i] += y;
+            }
+            this.polygon = new Polygon(this.x_array, this.y_array, 3);
         }
-        this.polygon = new Polygon(this.x_array, this.y_array, 3);
     }
 
     public boolean contains(MouseEvent evt) {

@@ -2,7 +2,6 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.util.ArrayList;
-import java.util.Random;
 
 import figures.*;
 
@@ -20,15 +19,15 @@ class List_frame extends JFrame {
     boolean change_inner, change_border;
     int inner_color_index = 0, border_color_index = 1;
     ArrayList<figure> figs = new ArrayList<figure>();
-    figure focus = null;
+    figure focus = null, focus_rect = new rect(0, 0, 0, 0, Color.RED, null), focus_ellipse = new ellipse(0, 0, 10, 10, Color.BLACK, Color.WHITE);
     Color aux = null, colors[] = {
         Color.WHITE, Color.BLACK, Color.BLUE, Color.CYAN, Color.DARK_GRAY,
         Color.GREEN, Color.LIGHT_GRAY, Color.MAGENTA, Color.ORANGE, Color.GRAY,
         Color.RED, Color.YELLOW, Color.PINK
     };
-    Random rand = new Random();
 
     List_frame() {
+        this.setFocusTraversalKeysEnabled(false);
         this.addWindowListener (
             new WindowAdapter() {
                 public void windowClosing(WindowEvent e) {
@@ -41,21 +40,26 @@ class List_frame extends JFrame {
             new MouseAdapter() {
                 public void mousePressed (MouseEvent evt) {
                     start_pos = getMousePosition();
-                    if (focus != null) {
-                        focus.border = aux;
+
+                    if (focus_rect.contains(evt) && focus != null) {
+                        return;
                     }
 
                     focus = null;
 
                     for (figure fig: figs) {
-                        if (fig.contains(evt)) {
+                        if (fig.contains(evt))
                             focus = fig;
-                            aux = focus.border;
-                        }
                     }
                     
                     if (focus != null) {
-                        focus.border = Color.RED;
+                        focus_rect.x = focus.x - 1;
+                        focus_rect.y = focus.y - 1;
+                        focus_rect.w = focus.w + 2;
+                        focus_rect.h = focus.h + 2;
+                        focus_ellipse.x = focus.x + focus.w - 8;
+                        focus_ellipse.y = focus.y + focus.h - 8;
+                        focus_rect.resize();
                         figs.remove(focus);
                         figs.add(focus);
                     }
@@ -69,8 +73,16 @@ class List_frame extends JFrame {
             new MouseMotionAdapter() {
                 public void mouseDragged (MouseEvent evt) {
                     if (focus != null) {
-                        if (start_pos != null)
+                        if (start_pos != null) {
                             focus.drag(evt.getX() - start_pos.x, evt.getY() - start_pos.y, evt.getPoint());
+                            focus_rect.x = focus.x - 1;
+                            focus_rect.y = focus.y - 1;
+                            focus_rect.w = focus.w + 2;
+                            focus_rect.h = focus.h + 2;
+                            focus_ellipse.x = focus.x + focus.w - 8;
+                            focus_ellipse.y = focus.y + focus.h - 8;
+                            focus_rect.resize();
+                        }
                         start_pos = getMousePosition();
                         repaint();
                     }
@@ -86,7 +98,6 @@ class List_frame extends JFrame {
                     if (mouse_pos == null) {
                         return;
                     }
-
                     if (evt.getKeyChar() == 'r')
                         figs.add(new rect(mouse_pos.x, mouse_pos.y, 60, 60, Color.BLACK, Color.WHITE));
                     else if (evt.getKeyChar() == 'e')
@@ -97,25 +108,18 @@ class List_frame extends JFrame {
                         figs.add(new triangle(mouse_pos.x, mouse_pos.y, 60, 60, Color.BLACK, Color.WHITE));
                     else if (evt.getKeyChar() == 'l')
                         figs.add(new line(mouse_pos.x, mouse_pos.y, 60, 60, Color.BLACK));
-                    else if (evt.getKeyCode() == 39 & focus != null) { // right
-                        if (focus.w < 200 || focus.type == "Linha") {
-                            focus.w += 5;
-                            focus.resize();
+                    else if (evt.getKeyCode() == 9) { // tab
+                        if (focus != null) {
+                            focus.border = aux;
                         }
-                    } else if (evt.getKeyCode() == 37 & focus != null) { // left
-                        if (focus.w > 20 || focus.type == "Linha") {
-                            focus.w -= 5;
-                            focus.resize();
-                        }
-                    } else if (evt.getKeyCode() == 38 & focus != null) { // up
-                        if (focus.h > 20 || focus.type == "Linha") {
-                            focus.h -= 5;
-                            focus.resize();
-                        }
-                    } else if (evt.getKeyCode() == 40 & focus != null) { // down
-                        if (focus.h < 200 || focus.type == "Linha") {
-                            focus.h  += 5;
-                            focus.resize();
+                        
+                        if (figs.size() > 0) {
+                            focus = figs.get(0);
+                            aux = focus.border;
+                            
+                            focus.border = Color.RED;
+                            figs.remove(focus);
+                            figs.add(focus);
                         }
                     } else if (evt.getKeyCode() == 61 & focus != null) { // =
                         if (focus.thickness < 7.5)
@@ -174,6 +178,11 @@ class List_frame extends JFrame {
 
         for (figure fig: this.figs) {
             fig.paint(g);
+        }
+        
+        if (focus != null) {
+            focus_rect.paint(g);
+            focus_ellipse.paint(g);
         }
     }
 }
