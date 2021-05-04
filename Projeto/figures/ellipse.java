@@ -32,19 +32,8 @@ public class ellipse extends figure {
     }
 
     public void drag (Point mouse_pos, int dist_x, int dist_y) {
-        if (Math.sqrt(Math.pow((this.x + this.w) - mouse_pos.x, 2) + Math.pow((this.y + this.h)- mouse_pos.y, 2)) <= 10) {
-            this.w += mouse_pos.x - (this.x + this.w);
-            this.h += mouse_pos.y - (this.y + this.h);
-
-            if (this.w < 20)
-                this.w = 20;
-            if (this.h < 20)
-                this.h = 20;
-        } else { 
-            this.x = mouse_pos.x - dist_x;
-            this.y = mouse_pos.y - dist_y;
-        }
-        this.polygon = new Ellipse2D.Double(this.x, this.y, this.w, this.h);
+        this.x = mouse_pos.x - dist_x;
+        this.y = mouse_pos.y - dist_y;
     }
 
     public boolean contains(MouseEvent evt) {
@@ -53,7 +42,17 @@ public class ellipse extends figure {
         return false;
     }
 
-    public void resize () {
+    public void resize (Point mouse_pos) {
+        this.w += mouse_pos.x - (this.x + this.w);
+        this.h += mouse_pos.y - (this.y + this.h);
+
+        if (this.w < 20)
+            this.w = 20;
+        if (this.h < 20)
+            this.h = 20;
+    }
+
+    public void update() {
         this.polygon = new Ellipse2D.Double(this.x, this.y, this.w, this.h);
     }
 }

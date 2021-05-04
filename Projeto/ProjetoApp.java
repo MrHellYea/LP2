@@ -38,7 +38,6 @@ class List_frame extends JFrame {
         this.addMouseListener (
             new MouseAdapter() {
                 public void mousePressed (MouseEvent evt) {
-                        
                     if (focus_rect.contains(evt) && focus != null) {
                         dist_x = evt.getX() - focus.x;
                         dist_y = evt.getY() - focus.y;
@@ -61,7 +60,8 @@ class List_frame extends JFrame {
                         focus_rect.h = focus.h + 2;
                         focus_ellipse.x = focus.x + focus.w - 8;
                         focus_ellipse.y = focus.y + focus.h - 8;
-                        focus_rect.resize();
+                        focus_ellipse.update();
+                        focus_rect.update();
                         figs.remove(focus);
                         figs.add(focus);
                     }
@@ -75,15 +75,23 @@ class List_frame extends JFrame {
             new MouseMotionAdapter() {
                 public void mouseDragged (MouseEvent evt) {
                     if (focus != null) {
-                        focus.drag(evt.getPoint(), dist_x, dist_y);
-                        focus_rect.x = focus.x - 1;
-                        focus_rect.y = focus.y - 1;
-                        focus_rect.w = focus.w + 2;
-                        focus_rect.h = focus.h + 2;
+                        Point point = evt.getPoint();
+
+                        if (Math.sqrt(Math.pow((focus.x + focus.w) - point.x, 2) + Math.pow((focus.y + focus.h)- point.y, 2)) <= 10) {
+                            focus.resize(point);
+                            focus_rect.resize(point);
+                            dist_x = evt.getX() - focus.x;
+                            dist_y = evt.getY() - focus.y;
+                        } else {
+                            focus.drag(point, dist_x, dist_y);
+                            focus_rect.drag(point, dist_x + 1, dist_y + 1);
+                        }
+
                         focus_ellipse.x = focus.x + focus.w - 8;
                         focus_ellipse.y = focus.y + focus.h - 8;
-                        focus_rect.resize();
-
+                        focus.update();
+                        focus_rect.update();
+                        focus_ellipse.update();
                         repaint();
                     }
                 }
@@ -117,7 +125,7 @@ class List_frame extends JFrame {
                             focus_rect.h = focus.h + 2;
                             focus_ellipse.x = focus.x + focus.w - 8;
                             focus_ellipse.y = focus.y + focus.h - 8;
-                            focus_rect.resize();
+                            focus_rect.update();
 
                             figs.remove(focus);
                             figs.add(focus);

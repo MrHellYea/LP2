@@ -13,7 +13,8 @@ public abstract class figure {
     public abstract void paint(Graphics g);
     public abstract void drag(Point mouse_pos, int dist_x, int dist_y);
     public abstract boolean contains(MouseEvent evt);
-    public abstract void resize();
+    public abstract void resize(Point mouse_pos);
+    public abstract void update();
 
     public void print () {
         System.out.format("%s de tamanho (%d,%d) na posicao (%d,%d).\n",
