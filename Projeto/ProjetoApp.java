@@ -15,7 +15,7 @@ public class ProjetoApp {
 class List_frame extends JFrame {
     private static final long serialVersionUID = 1L;
 
-    boolean change_inner, change_border;
+    boolean change_inner, change_border, resize;
     int inner_color_index = 0, border_color_index = 1, dist_x, dist_y;
     ArrayList<figure> figs = new ArrayList<figure>();
     figure focus = null, focus_rect = new rect(0, 0, 0, 0, Color.RED, null), focus_ellipse = new ellipse(0, 0, 10, 10, Color.BLACK, Color.WHITE);
@@ -39,6 +39,9 @@ class List_frame extends JFrame {
             new MouseAdapter() {
                 public void mousePressed (MouseEvent evt) {
                     if (focus_rect.contains(evt) && focus != null) {
+                        resize = false;
+                        if (Math.sqrt(Math.pow((focus.x + focus.w) - evt.getX(), 2) + Math.pow((focus.y + focus.h) - evt.getY(), 2)) <= 10)
+                            resize = true;
                         dist_x = evt.getX() - focus.x;
                         dist_y = evt.getY() - focus.y;
                         return;
@@ -52,6 +55,9 @@ class List_frame extends JFrame {
                     }
                     
                     if (focus != null) {
+                        resize = false;
+                        if (Math.sqrt(Math.pow((focus.x + focus.w) - evt.getX(), 2) + Math.pow((focus.y + focus.h) - evt.getY(), 2)) <= 10)
+                            resize = true;
                         dist_x = evt.getX() - focus.x;
                         dist_y = evt.getY() - focus.y;
                         focus_rect.x = focus.x - 1;
@@ -77,11 +83,9 @@ class List_frame extends JFrame {
                     if (focus != null) {
                         Point point = evt.getPoint();
 
-                        if (Math.sqrt(Math.pow((focus.x + focus.w) - point.x, 2) + Math.pow((focus.y + focus.h)- point.y, 2)) <= 10) {
+                        if (resize == true) {
                             focus.resize(point);
                             focus_rect.resize(point);
-                            dist_x = evt.getX() - focus.x;
-                            dist_y = evt.getY() - focus.y;
                         } else {
                             focus.drag(point, dist_x, dist_y);
                             focus_rect.drag(point, dist_x + 1, dist_y + 1);
