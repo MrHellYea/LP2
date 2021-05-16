@@ -36,7 +36,7 @@ public class ellipse extends figure {
         this.y = mouse_pos.y - dist_y;
     }
 
-    public boolean contains(MouseEvent evt) {
+    public boolean clicked(MouseEvent evt) {
         if (this.polygon.contains(evt.getPoint()))
             return true;
         return false;

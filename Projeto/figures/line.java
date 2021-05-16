@@ -41,7 +41,7 @@ public class line extends figure{
         this.y = mouse_pos.y - dist_y;
     }
 
-    public boolean contains(MouseEvent evt) {
+    public boolean clicked(MouseEvent evt) {
         if (this.polygon.ptSegDist(evt.getPoint()) <= 5)
             return true;
         return false;

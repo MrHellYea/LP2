@@ -38,7 +38,7 @@ class List_frame extends JFrame {
         this.addMouseListener (
             new MouseAdapter() {
                 public void mousePressed (MouseEvent evt) {
-                    if (focus_rect.contains(evt) && focus != null) {
+                    if (focus_rect.clicked(evt) && focus != null) {
                         resize = false;
                         if (Math.sqrt(Math.pow((focus.x + focus.w) - evt.getX(), 2) + Math.pow((focus.y + focus.h) - evt.getY(), 2)) <= 10)
                             resize = true;
@@ -50,7 +50,7 @@ class List_frame extends JFrame {
                     focus = null;
 
                     for (figure fig: figs) {
-                        if (fig.contains(evt))
+                        if (fig.clicked(evt))
                             focus = fig;
                     }
                     
