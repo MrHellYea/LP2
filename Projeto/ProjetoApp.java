@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 import figures.*;
+import buttons.*;
 
 public class ProjetoApp {
     public static void main(String[] args) {
@@ -18,7 +19,18 @@ class List_frame extends JFrame {
     boolean change_inner, change_border, resize;
     int inner_color_index = 0, border_color_index = 1, dist_x, dist_y;
     ArrayList<figure> figs = new ArrayList<figure>();
+
+    ArrayList<button> buttons = new ArrayList<button>() {{
+        add(new button(0, new rect(15, 40, 20, 20, Color.BLACK, Color.BLACK)));
+        add(new button(1, new ellipse(15, 70, 20, 20, Color.BLACK, Color.BLACK)));
+        add(new button(2, new triangle(15, 100, 20, 20, Color.BLACK, Color.BLACK)));
+        add(new button(3, new hexagon(15, 130, 20, 20, Color.BLACK, Color.BLACK)));
+        add(new button(4, new line(15, 160, 20, 20, Color.BLACK)));
+    }};
+
     figure focus = null, focus_rect = new rect(0, 0, 0, 0, Color.RED, null), focus_ellipse = new ellipse(0, 0, 10, 10, Color.BLACK, Color.WHITE);
+    button selected = null;
+
     Color aux = null, colors[] = {
         Color.WHITE, Color.BLACK, Color.BLUE, Color.CYAN, Color.DARK_GRAY,
         Color.GREEN, Color.LIGHT_GRAY, Color.MAGENTA, Color.ORANGE, Color.GRAY,
@@ -38,6 +50,41 @@ class List_frame extends JFrame {
         this.addMouseListener (
             new MouseAdapter() {
                 public void mousePressed (MouseEvent evt) {
+                    if (selected != null && !(evt.getX() >= 10 && evt.getX() <= 40 && evt.getY() >= 35 && evt.getY() <= 185)) {
+                        if (selected.fig.type == "Retangulo")
+                            figs.add(new rect(evt.getX(), evt.getY(), 60, 60, Color.BLACK, Color.WHITE));
+                        else if (selected.fig.type == "Elipse")
+                            figs.add(new ellipse(evt.getX(), evt.getY(), 60, 60, Color.BLACK, Color.WHITE));
+                        else if (selected.fig.type == "Triangulo")
+                            figs.add(new triangle(evt.getX(), evt.getY(), 60, 60, Color.BLACK, Color.WHITE));
+                        else if (selected.fig.type == "Hexagono")
+                            figs.add(new hexagon(evt.getX(), evt.getY(), 60, 60, Color.BLACK, Color.WHITE));
+                        else
+                            figs.add(new line(evt.getX(), evt.getY(), 60, 60, Color.BLACK));
+
+                        selected.focused = false;
+                        selected = null;
+                        repaint();
+                        return;
+                    }
+
+                    selected = null;
+
+                    for (button but: buttons) {
+                        but.focused = false;
+
+                        if (but.clicked(evt)) {
+                            but.focused = true;
+                            selected = but;
+                        }
+                    }
+
+                    if (selected != null) {
+                        focus = null;
+                        repaint();
+                        return;
+                    }
+
                     if (focus_rect.clicked(evt) && focus != null) {
                         resize = false;
                         if (Math.sqrt(Math.pow((focus.x + focus.w) - evt.getX(), 2) + Math.pow((focus.y + focus.h) - evt.getY(), 2)) <= 10)
@@ -196,6 +243,10 @@ class List_frame extends JFrame {
         if (focus != null) {
             focus_rect.paint(g);
             focus_ellipse.paint(g);
+        }
+
+        for (button but: this.buttons) {
+            but.paint(g);
         }
     }
 }
