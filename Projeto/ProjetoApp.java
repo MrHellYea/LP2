@@ -2,6 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.util.ArrayList;
+import java.io.*;
 
 import figures.*;
 import buttons.*;
@@ -39,9 +40,29 @@ class List_frame extends JFrame {
 
     List_frame() {
         this.setFocusTraversalKeysEnabled(false);
+
+        try {
+            FileInputStream f = new FileInputStream("proj.bin");
+            ObjectInputStream o = new ObjectInputStream(f);
+            this.figs = (ArrayList<figure>) o.readObject();
+            o.close();
+        } catch (Exception err) {
+            System.out.format("Erro ao ler arquivo: %s\n", err.getMessage());
+        }
+
         this.addWindowListener (
             new WindowAdapter() {
                 public void windowClosing(WindowEvent e) {
+                    try {
+                        FileOutputStream f = new FileOutputStream("proj.bin");
+                        ObjectOutputStream o = new ObjectOutputStream(f);
+                        o.writeObject(figs);
+                        o.flush();
+                        o.close();
+                    } catch (Exception err) {
+                        System.out.format("Erro ao salvar arquivo: %s\n", err.getMessage());
+                    }
+ 
                     System.exit(0);
                 }
             }

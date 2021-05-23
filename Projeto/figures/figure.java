@@ -2,8 +2,9 @@ package figures;
 
 import java.awt.*;
 import interfaces.*;
+import java.io.Serializable;
 
-public abstract class figure implements iVisible {
+public abstract class figure implements iVisible, Serializable {
     public int x, y;
     public int w, h;
     public float thickness;
