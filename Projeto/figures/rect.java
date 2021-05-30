@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class rect extends figure {
-    Rectangle polygon;
+    private Rectangle polygon;
 
     public rect (int x, int y, int w, int h, Color border, Color inner) {
         this.type = "Retangulo";

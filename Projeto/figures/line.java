@@ -7,7 +7,7 @@ import java.awt.geom.Line2D;
 public class line extends figure{
     private int x1, x2;
     private int y1, y2;
-    Line2D polygon;
+    private Line2D polygon;
 
     public line (int x, int y, int w, int h, Color border) {
         this.type = "Linha";

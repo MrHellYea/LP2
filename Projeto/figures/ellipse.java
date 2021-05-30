@@ -5,7 +5,7 @@ import java.awt.event.*;
 import java.awt.geom.Ellipse2D;
 
 public class ellipse extends figure {
-    Ellipse2D polygon;
+    private Ellipse2D polygon;
 
     public ellipse (int x, int y, int w, int h, Color border, Color inner) {
         this.type = "Elipse";

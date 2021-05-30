@@ -6,13 +6,11 @@ import interfaces.*;
 import figures.*;
 
 public class button implements iVisible {
-    public int x, y;
-    public int index;
+    private int x, y;
     public figure fig;
     public boolean focused;
 
     public button(int index, figure fig) {
-        this.index = index;
         this.fig = fig;
         this.focused = false;
 

@@ -7,7 +7,7 @@ public class triangle extends figure {
     private int x1, x2, x3;
     private int y1, y2, y3;
     private int x_array[], y_array[];
-    Polygon polygon;
+    private  Polygon polygon;
 
     public triangle (int x, int y, int w, int h, Color border, Color inner) {
         this.type = "Triangulo";

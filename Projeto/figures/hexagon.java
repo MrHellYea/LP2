@@ -8,7 +8,7 @@ public class hexagon extends figure {
     private int x1, y1, x2, y2, x3, y3;
     private int x4, y4, x5, y5, x6, y6;
     private int x_array[], y_array[];
-    Polygon polygon;
+    private Polygon polygon;
 
     public hexagon(int x, int y, int w, int h, Color border, Color inner) {
         this.type = "Hexagono";
